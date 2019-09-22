@@ -7,3 +7,5 @@ The challenge is given a matrix of 783 pixels, build a machine learning algorith
 This is the reason I designed Digit Reci, to provide a simple user interface to train test and analyze model performance.
 
 Docker : https://hub.docker.com/r/ianfogelman/digireci
+
+<img src="DigiReciDemo.gif" />
