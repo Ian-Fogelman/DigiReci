@@ -1,0 +1,1097 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <title>Digi-Reci Digit Recognizer</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+   </head>
+   <style>
+      .pixel {
+      display: table-cell;
+      background-color: white;
+      width: 1em;
+      height: 1em;
+      }
+      .rowA {
+      display: table-row;
+      }
+      #art {
+      display: table;
+      border-spacing: 1px;
+      background-color: black;
+      border: 5px solid black;
+      }
+      .highlight {
+      background: #000000;
+      }
+   </style>
+     <body id="page-top">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+         <a class="navbar-brand" href="#">Digi Reci</a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+               <li class="nav-item">
+                  <a class="nav-link" href="/index">Predict <span class="sr-only">(current)</span></a>
+               </li>
+               <li class="nav-item active">
+                  <a class="nav-link" href="/train">Train</a>
+               </li>
+               <!--<li class="nav-item">
+                  <a class="nav-link" href="/test">Test</a>
+               </li>-->
+               <li class="nav-item">
+                  <a class="nav-link" href="/stats">Stats</a>
+               </li>
+            </ul>
+         </div>
+      </nav>
+      <div id="content-wrapper">
+         <div class="container-fluid">
+            <br />
+            <div class="card card-body bg-light">
+               <div style="text-align: center;" class="row">
+
+               </div>
+            </div>
+            <center>
+               <br />
+               <div class="container">
+                  <div class="row">
+                     <div class="col-sm">
+                        <div class="card bg-light mb-3" style="max-width: 18rem;">
+                           <div class="card-header">Instructions</div>
+                           <div class="card-body">
+                              <h5 class="card-title"><i>Train you model</i></h5>
+                              <p class="card-text">Like in the predict tab, click and drag to draw a digit. Then select a label for your drawing and click the train button. This data will be added to the trainset data set for your model.</p>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-sm">
+                        <div id="art" onmousedown="event.preventDefault ? event.preventDefault() : event.returnValue = false">
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                           <div class="rowA">
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                              <div class="pixel"></div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-sm">
+                        <div class="col">
+                           <div class="card bg-light mb-3" style="max-width: 18rem;">
+                              <div class="card-header">Label</div>
+                              <div class="card-body">
+                                 <h5 class="card-title"></h5>
+                                 <p class="card-text">                           <select class="form-control" id="xlabel" style="width:5em;">
+                              <option>0</option>
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                              <option>6</option>
+                              <option>7</option>
+                              <option>8</option>
+                              <option>9</option>
+
+                            </select></p>
+                             <!--<div class="form-check">
+                               <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                               <label class="form-check-label" for="exampleCheck1">Add to Testing</label>
+                             </div>-->
+                              </div>
+                           </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col">
+                           <div class="col">
+                              <div class="card bg-light mb-3" style="max-width: 18rem;">
+                                 <div class="card-header">Add to Training Data</div>
+                                 <div class="card-body">
+                                    <h5 class="card-title"></h5>
+                                    <p class="card-text"><button onclick="genJson()" type="button" class="btn btn-primary">Train</button> </p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col">
+                           <div class="col">
+                              <div class="card bg-light mb-3" style="max-width: 18rem;">
+                                 <div class="card-header">Reset</div>
+                                 <div class="card-body">
+                                    <h5 class="card-title"></h5>
+                                    <p class="card-text"><button onclick="reloadPage()" type="button" class="btn btn-danger">Reset</button></p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </center>
+             <br>
+             <br>
+                  <div class="card card-body bg-light">
+         <div class="container">
+            <div class="row">
+            </div>
+         </div>
+      </div>
+      </div>
+      </center>
+      </div>
+      </div>
+         </div>
+      </div>
+      <br />
+
+      </center>
+      <!-- /.container-fluid -->
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+         <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+               <span>Copyright © Digi Reci 2019</span>
+            </div>
+         </div>
+      </footer>
+      </div>
+      </div>
+   </body>
+   <script>
+
+      $(document).ready(function () {
+
+          toastr.options = {
+				'closeButton': true,
+				'debug': false,
+				'newestOnTop': false,
+				'progressBar': false,
+				'positionClass': 'toast-top-center',
+				'preventDuplicates': false,
+				'showDuration': '1000',
+				'hideDuration': '1000',
+				'timeOut': '5000',
+				'extendedTimeOut': '1000',
+				'showEasing': 'swing',
+				'hideEasing': 'linear',
+				'showMethod': 'fadeIn',
+				'hideMethod': 'fadeOut',
+			}
+
+          var $box = $('.pixel').mousedown(function () {
+              $(this).toggleClass('highlight');
+              var flag = $(this).hasClass('highlight')
+              $box.on('mouseenter.highlight', function () {
+                  $(this).toggleClass('highlight', flag);
+              });
+          });
+
+          $(document).mouseup(function () {
+              $box.off('mouseenter.highlight')
+          })
+      });
+
+      function genJson() {
+
+        var payload = [];
+        var pixels = document.getElementsByClassName("pixel");
+        for(var i = 0; i < pixels.length; i++)
+        {
+            var jsonData = {}
+
+            if(pixels[i].classList.contains("highlight") == true)
+            {
+              payload.push(1);
+            }
+            if(pixels[i].classList.contains("highlight") == false)
+            {
+              payload.push(0);
+            }
+        }
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/apiTrain", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        var xlabel = $('#xlabel').val();
+
+
+        var mydata = {	"label" : { "0" : xlabel}, "pixel0": {		"0": -1	},	"pixel1": {		"0": -1	},	"pixel2": {		"0": -1	},	"pixel3": {		"0": -1	},	"pixel4": {		"0": -1	},	"pixel5": {		"0": -1	},	"pixel6": {		"0": -1	},	"pixel7": {		"0": -1	},	"pixel8": {		"0": -1	},	"pixel9": {		"0": -1	},	"pixel10": {		"0": -1	},	"pixel11": {		"0": -1	},	"pixel12": {		"0": -1	},	"pixel13": {		"0": -1	},	"pixel14": {		"0": -1	},	"pixel15": {		"0": -1	},	"pixel16": {		"0": -1	},	"pixel17": {		"0": -1	},	"pixel18": {		"0": -1	},	"pixel19": {		"0": -1	},	"pixel20": {		"0": -1	},	"pixel21": {		"0": -1	},	"pixel22": {		"0": -1	},	"pixel23": {		"0": -1	},	"pixel24": {		"0": -1	},	"pixel25": {		"0": -1	},	"pixel26": {		"0": -1	},	"pixel27": {		"0": -1	},	"pixel28": {		"0": -1	},	"pixel29": {		"0": -1	},	"pixel30": {		"0": -1	},	"pixel31": {		"0": -1	},	"pixel32": {		"0": -1	},	"pixel33": {		"0": -1	},	"pixel34": {		"0": -1	},	"pixel35": {		"0": -1	},	"pixel36": {		"0": -1	},	"pixel37": {		"0": -1	},	"pixel38": {		"0": -1	},	"pixel39": {		"0": -1	},	"pixel40": {		"0": -1	},	"pixel41": {		"0": -1	},	"pixel42": {		"0": -1	},	"pixel43": {		"0": -1	},	"pixel44": {		"0": -1	},	"pixel45": {		"0": -1	},	"pixel46": {		"0": -1	},	"pixel47": {		"0": -1	},	"pixel48": {		"0": -1	},	"pixel49": {		"0": -1	},	"pixel50": {		"0": -1	},	"pixel51": {		"0": -1	},	"pixel52": {		"0": -1	},	"pixel53": {		"0": -1	},	"pixel54": {		"0": -1	},	"pixel55": {		"0": -1	},	"pixel56": {		"0": -1	},	"pixel57": {		"0": -1	},	"pixel58": {		"0": -1	},	"pixel59": {		"0": -1	},	"pixel60": {		"0": -1	},	"pixel61": {		"0": -1	},	"pixel62": {		"0": -1	},	"pixel63": {		"0": -1	},	"pixel64": {		"0": -1	},	"pixel65": {		"0": -1	},	"pixel66": {		"0": -1	},	"pixel67": {		"0": -1	},	"pixel68": {		"0": -1	},	"pixel69": {		"0": -1	},	"pixel70": {		"0": -1	},	"pixel71": {		"0": -1	},	"pixel72": {		"0": -1	},	"pixel73": {		"0": -1	},	"pixel74": {		"0": -1	},	"pixel75": {		"0": -1	},	"pixel76": {		"0": -1	},	"pixel77": {		"0": -1	},	"pixel78": {		"0": -1	},	"pixel79": {		"0": -1	},	"pixel80": {		"0": -1	},	"pixel81": {		"0": -1	},	"pixel82": {		"0": -1	},	"pixel83": {		"0": -1	},	"pixel84": {		"0": -1	},	"pixel85": {		"0": -1	},	"pixel86": {		"0": -1	},	"pixel87": {		"0": -1	},	"pixel88": {		"0": -1	},	"pixel89": {		"0": -1	},	"pixel90": {		"0": -1	},	"pixel91": {		"0": -1	},	"pixel92": {		"0": -1	},	"pixel93": {		"0": -1	},	"pixel94": {		"0": -1	},	"pixel95": {		"0": -1	},	"pixel96": {		"0": -1	},	"pixel97": {		"0": -1	},	"pixel98": {		"0": -1	},	"pixel99": {		"0": -1	},	"pixel100": {		"0": -1	},	"pixel101": {		"0": -1	},	"pixel102": {		"0": -1	},	"pixel103": {		"0": -1	},	"pixel104": {		"0": -1	},	"pixel105": {		"0": -1	},	"pixel106": {		"0": -1	},	"pixel107": {		"0": -1	},	"pixel108": {		"0": -1	},	"pixel109": {		"0": -1	},	"pixel110": {		"0": -1	},	"pixel111": {		"0": -1	},	"pixel112": {		"0": -1	},	"pixel113": {		"0": -1	},	"pixel114": {		"0": -1	},	"pixel115": {		"0": -1	},	"pixel116": {		"0": -1	},	"pixel117": {		"0": -1	},	"pixel118": {		"0": -1	},	"pixel119": {		"0": -1	},	"pixel120": {		"0": -1	},	"pixel121": {		"0": -1	},	"pixel122": {		"0": -1	},	"pixel123": {		"0": -1	},	"pixel124": {		"0": -1	},	"pixel125": {		"0": -1	},	"pixel126": {		"0": -1	},	"pixel127": {		"0": -1	},	"pixel128": {		"0": -1	},	"pixel129": {		"0": -1	},	"pixel130": {		"0": -1	},	"pixel131": {		"0": -1	},	"pixel132": {		"0": -1	},	"pixel133": {		"0": -1	},	"pixel134": {		"0": -1	},	"pixel135": {		"0": -1	},	"pixel136": {		"0": -1	},	"pixel137": {		"0": -1	},	"pixel138": {		"0": -1	},	"pixel139": {		"0": -1	},	"pixel140": {		"0": -1	},	"pixel141": {		"0": -1	},	"pixel142": {		"0": -1	},	"pixel143": {		"0": -1	},	"pixel144": {		"0": -1	},	"pixel145": {		"0": -1	},	"pixel146": {		"0": -1	},	"pixel147": {		"0": -1	},	"pixel148": {		"0": -1	},	"pixel149": {		"0": -1	},	"pixel150": {		"0": -1	},	"pixel151": {		"0": -1	},	"pixel152": {		"0": -1	},	"pixel153": {		"0": -1	},	"pixel154": {		"0": -1	},	"pixel155": {		"0": -1	},	"pixel156": {		"0": -1	},	"pixel157": {		"0": -1	},	"pixel158": {		"0": -1	},	"pixel159": {		"0": -1	},	"pixel160": {		"0": -1	},	"pixel161": {		"0": -1	},	"pixel162": {		"0": -1	},	"pixel163": {		"0": -1	},	"pixel164": {		"0": -1	},	"pixel165": {		"0": -1	},	"pixel166": {		"0": -1	},	"pixel167": {		"0": -1	},	"pixel168": {		"0": -1	},	"pixel169": {		"0": -1	},	"pixel170": {		"0": -1	},	"pixel171": {		"0": -1	},	"pixel172": {		"0": -1	},	"pixel173": {		"0": -1	},	"pixel174": {		"0": -1	},	"pixel175": {		"0": -1	},	"pixel176": {		"0": -1	},	"pixel177": {		"0": -1	},	"pixel178": {		"0": -1	},	"pixel179": {		"0": -1	},	"pixel180": {		"0": -1	},	"pixel181": {		"0": -1	},	"pixel182": {		"0": -1	},	"pixel183": {		"0": -1	},	"pixel184": {		"0": -1	},	"pixel185": {		"0": -1	},	"pixel186": {		"0": -1	},	"pixel187": {		"0": -1	},	"pixel188": {		"0": -1	},	"pixel189": {		"0": -1	},	"pixel190": {		"0": -1	},	"pixel191": {		"0": -1	},	"pixel192": {		"0": -1	},	"pixel193": {		"0": -1	},	"pixel194": {		"0": -1	},	"pixel195": {		"0": -1	},	"pixel196": {		"0": -1	},	"pixel197": {		"0": -1	},	"pixel198": {		"0": -1	},	"pixel199": {		"0": -1	},	"pixel200": {		"0": -1	},	"pixel201": {		"0": -1	},	"pixel202": {		"0": -1	},	"pixel203": {		"0": -1	},	"pixel204": {		"0": -1	},	"pixel205": {		"0": -1	},	"pixel206": {		"0": -1	},	"pixel207": {		"0": -1	},	"pixel208": {		"0": -1	},	"pixel209": {		"0": -1	},	"pixel210": {		"0": -1	},	"pixel211": {		"0": -1	},	"pixel212": {		"0": -1	},	"pixel213": {		"0": -1	},	"pixel214": {		"0": -1	},	"pixel215": {		"0": -1	},	"pixel216": {		"0": -1	},	"pixel217": {		"0": -1	},	"pixel218": {		"0": -1	},	"pixel219": {		"0": -1	},	"pixel220": {		"0": -1	},	"pixel221": {		"0": -1	},	"pixel222": {		"0": -1	},	"pixel223": {		"0": -1	},	"pixel224": {		"0": -1	},	"pixel225": {		"0": -1	},	"pixel226": {		"0": -1	},	"pixel227": {		"0": -1	},	"pixel228": {		"0": -1	},	"pixel229": {		"0": -1	},	"pixel230": {		"0": -1	},	"pixel231": {		"0": -1	},	"pixel232": {		"0": -1	},	"pixel233": {		"0": -1	},	"pixel234": {		"0": -1	},	"pixel235": {		"0": -1	},	"pixel236": {		"0": -1	},	"pixel237": {		"0": -1	},	"pixel238": {		"0": -1	},	"pixel239": {		"0": -1	},	"pixel240": {		"0": -1	},	"pixel241": {		"0": -1	},	"pixel242": {		"0": -1	},	"pixel243": {		"0": -1	},	"pixel244": {		"0": -1	},	"pixel245": {		"0": -1	},	"pixel246": {		"0": -1	},	"pixel247": {		"0": -1	},	"pixel248": {		"0": -1	},	"pixel249": {		"0": -1	},	"pixel250": {		"0": -1	},	"pixel251": {		"0": -1	},	"pixel252": {		"0": -1	},	"pixel253": {		"0": -1	},	"pixel254": {		"0": -1	},	"pixel255": {		"0": -1	},	"pixel256": {		"0": -1	},	"pixel257": {		"0": -1	},	"pixel258": {		"0": -1	},	"pixel259": {		"0": -1	},	"pixel260": {		"0": -1	},	"pixel261": {		"0": -1	},	"pixel262": {		"0": -1	},	"pixel263": {		"0": -1	},	"pixel264": {		"0": -1	},	"pixel265": {		"0": -1	},	"pixel266": {		"0": -1	},	"pixel267": {		"0": -1	},	"pixel268": {		"0": -1	},	"pixel269": {		"0": -1	},	"pixel270": {		"0": -1	},	"pixel271": {		"0": -1	},	"pixel272": {		"0": -1	},	"pixel273": {		"0": -1	},	"pixel274": {		"0": -1	},	"pixel275": {		"0": -1	},	"pixel276": {		"0": -1	},	"pixel277": {		"0": -1	},	"pixel278": {		"0": -1	},	"pixel279": {		"0": -1	},	"pixel280": {		"0": -1	},	"pixel281": {		"0": -1	},	"pixel282": {		"0": -1	},	"pixel283": {		"0": -1	},	"pixel284": {		"0": -1	},	"pixel285": {		"0": -1	},	"pixel286": {		"0": -1	},	"pixel287": {		"0": -1	},	"pixel288": {		"0": -1	},	"pixel289": {		"0": -1	},	"pixel290": {		"0": -1	},	"pixel291": {		"0": -1	},	"pixel292": {		"0": -1	},	"pixel293": {		"0": -1	},	"pixel294": {		"0": -1	},	"pixel295": {		"0": -1	},	"pixel296": {		"0": -1	},	"pixel297": {		"0": -1	},	"pixel298": {		"0": -1	},	"pixel299": {		"0": -1	},	"pixel300": {		"0": -1	},	"pixel301": {		"0": -1	},	"pixel302": {		"0": -1	},	"pixel303": {		"0": -1	},	"pixel304": {		"0": -1	},	"pixel305": {		"0": -1	},	"pixel306": {		"0": -1	},	"pixel307": {		"0": -1	},	"pixel308": {		"0": -1	},	"pixel309": {		"0": -1	},	"pixel310": {		"0": -1	},	"pixel311": {		"0": -1	},	"pixel312": {		"0": -1	},	"pixel313": {		"0": -1	},	"pixel314": {		"0": -1	},	"pixel315": {		"0": -1	},	"pixel316": {		"0": -1	},	"pixel317": {		"0": -1	},	"pixel318": {		"0": -1	},	"pixel319": {		"0": -1	},	"pixel320": {		"0": -1	},	"pixel321": {		"0": -1	},	"pixel322": {		"0": -1	},	"pixel323": {		"0": -1	},	"pixel324": {		"0": -1	},	"pixel325": {		"0": -1	},	"pixel326": {		"0": -1	},	"pixel327": {		"0": -1	},	"pixel328": {		"0": -1	},	"pixel329": {		"0": -1	},	"pixel330": {		"0": -1	},	"pixel331": {		"0": -1	},	"pixel332": {		"0": -1	},	"pixel333": {		"0": -1	},	"pixel334": {		"0": -1	},	"pixel335": {		"0": -1	},	"pixel336": {		"0": -1	},	"pixel337": {		"0": -1	},	"pixel338": {		"0": -1	},	"pixel339": {		"0": -1	},	"pixel340": {		"0": -1	},	"pixel341": {		"0": -1	},	"pixel342": {		"0": -1	},	"pixel343": {		"0": -1	},	"pixel344": {		"0": -1	},	"pixel345": {		"0": -1	},	"pixel346": {		"0": -1	},	"pixel347": {		"0": -1	},	"pixel348": {		"0": -1	},	"pixel349": {		"0": -1	},	"pixel350": {		"0": -1	},	"pixel351": {		"0": -1	},	"pixel352": {		"0": -1	},	"pixel353": {		"0": -1	},	"pixel354": {		"0": -1	},	"pixel355": {		"0": -1	},	"pixel356": {		"0": -1	},	"pixel357": {		"0": -1	},	"pixel358": {		"0": -1	},	"pixel359": {		"0": -1	},	"pixel360": {		"0": -1	},	"pixel361": {		"0": -1	},	"pixel362": {		"0": -1	},	"pixel363": {		"0": -1	},	"pixel364": {		"0": -1	},	"pixel365": {		"0": -1	},	"pixel366": {		"0": -1	},	"pixel367": {		"0": -1	},	"pixel368": {		"0": -1	},	"pixel369": {		"0": -1	},	"pixel370": {		"0": -1	},	"pixel371": {		"0": -1	},	"pixel372": {		"0": -1	},	"pixel373": {		"0": -1	},	"pixel374": {		"0": -1	},	"pixel375": {		"0": -1	},	"pixel376": {		"0": -1	},	"pixel377": {		"0": -1	},	"pixel378": {		"0": -1	},	"pixel379": {		"0": -1	},	"pixel380": {		"0": -1	},	"pixel381": {		"0": -1	},	"pixel382": {		"0": -1	},	"pixel383": {		"0": -1	},	"pixel384": {		"0": -1	},	"pixel385": {		"0": -1	},	"pixel386": {		"0": -1	},	"pixel387": {		"0": -1	},	"pixel388": {		"0": -1	},	"pixel389": {		"0": -1	},	"pixel390": {		"0": -1	},	"pixel391": {		"0": -1	},	"pixel392": {		"0": -1	},	"pixel393": {		"0": -1	},	"pixel394": {		"0": -1	},	"pixel395": {		"0": -1	},	"pixel396": {		"0": -1	},	"pixel397": {		"0": -1	},	"pixel398": {		"0": -1	},	"pixel399": {		"0": -1	},	"pixel400": {		"0": -1	},	"pixel401": {		"0": -1	},	"pixel402": {		"0": -1	},	"pixel403": {		"0": -1	},	"pixel404": {		"0": -1	},	"pixel405": {		"0": -1	},	"pixel406": {		"0": -1	},	"pixel407": {		"0": -1	},	"pixel408": {		"0": -1	},	"pixel409": {		"0": -1	},	"pixel410": {		"0": -1	},	"pixel411": {		"0": -1	},	"pixel412": {		"0": -1	},	"pixel413": {		"0": -1	},	"pixel414": {		"0": -1	},	"pixel415": {		"0": -1	},	"pixel416": {		"0": -1	},	"pixel417": {		"0": -1	},	"pixel418": {		"0": -1	},	"pixel419": {		"0": -1	},	"pixel420": {		"0": -1	},	"pixel421": {		"0": -1	},	"pixel422": {		"0": -1	},	"pixel423": {		"0": -1	},	"pixel424": {		"0": -1	},	"pixel425": {		"0": -1	},	"pixel426": {		"0": -1	},	"pixel427": {		"0": -1	},	"pixel428": {		"0": -1	},	"pixel429": {		"0": -1	},	"pixel430": {		"0": -1	},	"pixel431": {		"0": -1	},	"pixel432": {		"0": -1	},	"pixel433": {		"0": -1	},	"pixel434": {		"0": -1	},	"pixel435": {		"0": -1	},	"pixel436": {		"0": -1	},	"pixel437": {		"0": -1	},	"pixel438": {		"0": -1	},	"pixel439": {		"0": -1	},	"pixel440": {		"0": -1	},	"pixel441": {		"0": -1	},	"pixel442": {		"0": -1	},	"pixel443": {		"0": -1	},	"pixel444": {		"0": -1	},	"pixel445": {		"0": -1	},	"pixel446": {		"0": -1	},	"pixel447": {		"0": -1	},	"pixel448": {		"0": -1	},	"pixel449": {		"0": -1	},	"pixel450": {		"0": -1	},	"pixel451": {		"0": -1	},	"pixel452": {		"0": -1	},	"pixel453": {		"0": -1	},	"pixel454": {		"0": -1	},	"pixel455": {		"0": -1	},	"pixel456": {		"0": -1	},	"pixel457": {		"0": -1	},	"pixel458": {		"0": -1	},	"pixel459": {		"0": -1	},	"pixel460": {		"0": -1	},	"pixel461": {		"0": -1	},	"pixel462": {		"0": -1	},	"pixel463": {		"0": -1	},	"pixel464": {		"0": -1	},	"pixel465": {		"0": -1	},	"pixel466": {		"0": -1	},	"pixel467": {		"0": -1	},	"pixel468": {		"0": -1	},	"pixel469": {		"0": -1	},	"pixel470": {		"0": -1	},	"pixel471": {		"0": -1	},	"pixel472": {		"0": -1	},	"pixel473": {		"0": -1	},	"pixel474": {		"0": -1	},	"pixel475": {		"0": -1	},	"pixel476": {		"0": -1	},	"pixel477": {		"0": -1	},	"pixel478": {		"0": -1	},	"pixel479": {		"0": -1	},	"pixel480": {		"0": -1	},	"pixel481": {		"0": -1	},	"pixel482": {		"0": -1	},	"pixel483": {		"0": -1	},	"pixel484": {		"0": -1	},	"pixel485": {		"0": -1	},	"pixel486": {		"0": -1	},	"pixel487": {		"0": -1	},	"pixel488": {		"0": -1	},	"pixel489": {		"0": -1	},	"pixel490": {		"0": -1	},	"pixel491": {		"0": -1	},	"pixel492": {		"0": -1	},	"pixel493": {		"0": -1	},	"pixel494": {		"0": -1	},	"pixel495": {		"0": -1	},	"pixel496": {		"0": -1	},	"pixel497": {		"0": -1	},	"pixel498": {		"0": -1	},	"pixel499": {		"0": -1	},	"pixel500": {		"0": -1	},	"pixel501": {		"0": -1	},	"pixel502": {		"0": -1	},	"pixel503": {		"0": -1	},	"pixel504": {		"0": -1	},	"pixel505": {		"0": -1	},	"pixel506": {		"0": -1	},	"pixel507": {		"0": -1	},	"pixel508": {		"0": -1	},	"pixel509": {		"0": -1	},	"pixel510": {		"0": -1	},	"pixel511": {		"0": -1	},	"pixel512": {		"0": -1	},	"pixel513": {		"0": -1	},	"pixel514": {		"0": -1	},	"pixel515": {		"0": -1	},	"pixel516": {		"0": -1	},	"pixel517": {		"0": -1	},	"pixel518": {		"0": -1	},	"pixel519": {		"0": -1	},	"pixel520": {		"0": -1	},	"pixel521": {		"0": -1	},	"pixel522": {		"0": -1	},	"pixel523": {		"0": -1	},	"pixel524": {		"0": -1	},	"pixel525": {		"0": -1	},	"pixel526": {		"0": -1	},	"pixel527": {		"0": -1	},	"pixel528": {		"0": -1	},	"pixel529": {		"0": -1	},	"pixel530": {		"0": -1	},	"pixel531": {		"0": -1	},	"pixel532": {		"0": -1	},	"pixel533": {		"0": -1	},	"pixel534": {		"0": -1	},	"pixel535": {		"0": -1	},	"pixel536": {		"0": -1	},	"pixel537": {		"0": -1	},	"pixel538": {		"0": -1	},	"pixel539": {		"0": -1	},	"pixel540": {		"0": -1	},	"pixel541": {		"0": -1	},	"pixel542": {		"0": -1	},	"pixel543": {		"0": -1	},	"pixel544": {		"0": -1	},	"pixel545": {		"0": -1	},	"pixel546": {		"0": -1	},	"pixel547": {		"0": -1	},	"pixel548": {		"0": -1	},	"pixel549": {		"0": -1	},	"pixel550": {		"0": -1	},	"pixel551": {		"0": -1	},	"pixel552": {		"0": -1	},	"pixel553": {		"0": -1	},	"pixel554": {		"0": -1	},	"pixel555": {		"0": -1	},	"pixel556": {		"0": -1	},	"pixel557": {		"0": -1	},	"pixel558": {		"0": -1	},	"pixel559": {		"0": -1	},	"pixel560": {		"0": -1	},	"pixel561": {		"0": -1	},	"pixel562": {		"0": -1	},	"pixel563": {		"0": -1	},	"pixel564": {		"0": -1	},	"pixel565": {		"0": -1	},	"pixel566": {		"0": -1	},	"pixel567": {		"0": -1	},	"pixel568": {		"0": -1	},	"pixel569": {		"0": -1	},	"pixel570": {		"0": -1	},	"pixel571": {		"0": -1	},	"pixel572": {		"0": -1	},	"pixel573": {		"0": -1	},	"pixel574": {		"0": -1	},	"pixel575": {		"0": -1	},	"pixel576": {		"0": -1	},	"pixel577": {		"0": -1	},	"pixel578": {		"0": -1	},	"pixel579": {		"0": -1	},	"pixel580": {		"0": -1	},	"pixel581": {		"0": -1	},	"pixel582": {		"0": -1	},	"pixel583": {		"0": -1	},	"pixel584": {		"0": -1	},	"pixel585": {		"0": -1	},	"pixel586": {		"0": -1	},	"pixel587": {		"0": -1	},	"pixel588": {		"0": -1	},	"pixel589": {		"0": -1	},	"pixel590": {		"0": -1	},	"pixel591": {		"0": -1	},	"pixel592": {		"0": -1	},	"pixel593": {		"0": -1	},	"pixel594": {		"0": -1	},	"pixel595": {		"0": -1	},	"pixel596": {		"0": -1	},	"pixel597": {		"0": -1	},	"pixel598": {		"0": -1	},	"pixel599": {		"0": -1	},	"pixel600": {		"0": -1	},	"pixel601": {		"0": -1	},	"pixel602": {		"0": -1	},	"pixel603": {		"0": -1	},	"pixel604": {		"0": -1	},	"pixel605": {		"0": -1	},	"pixel606": {		"0": -1	},	"pixel607": {		"0": -1	},	"pixel608": {		"0": -1	},	"pixel609": {		"0": -1	},	"pixel610": {		"0": -1	},	"pixel611": {		"0": -1	},	"pixel612": {		"0": -1	},	"pixel613": {		"0": -1	},	"pixel614": {		"0": -1	},	"pixel615": {		"0": -1	},	"pixel616": {		"0": -1	},	"pixel617": {		"0": -1	},	"pixel618": {		"0": -1	},	"pixel619": {		"0": -1	},	"pixel620": {		"0": -1	},	"pixel621": {		"0": -1	},	"pixel622": {		"0": -1	},	"pixel623": {		"0": -1	},	"pixel624": {		"0": -1	},	"pixel625": {		"0": -1	},	"pixel626": {		"0": -1	},	"pixel627": {		"0": -1	},	"pixel628": {		"0": -1	},	"pixel629": {		"0": -1	},	"pixel630": {		"0": -1	},	"pixel631": {		"0": -1	},	"pixel632": {		"0": -1	},	"pixel633": {		"0": -1	},	"pixel634": {		"0": -1	},	"pixel635": {		"0": -1	},	"pixel636": {		"0": -1	},	"pixel637": {		"0": -1	},	"pixel638": {		"0": -1	},	"pixel639": {		"0": -1	},	"pixel640": {		"0": -1	},	"pixel641": {		"0": -1	},	"pixel642": {		"0": -1	},	"pixel643": {		"0": -1	},	"pixel644": {		"0": -1	},	"pixel645": {		"0": -1	},	"pixel646": {		"0": -1	},	"pixel647": {		"0": -1	},	"pixel648": {		"0": -1	},	"pixel649": {		"0": -1	},	"pixel650": {		"0": -1	},	"pixel651": {		"0": -1	},	"pixel652": {		"0": -1	},	"pixel653": {		"0": -1	},	"pixel654": {		"0": -1	},	"pixel655": {		"0": -1	},	"pixel656": {		"0": -1	},	"pixel657": {		"0": -1	},	"pixel658": {		"0": -1	},	"pixel659": {		"0": -1	},	"pixel660": {		"0": -1	},	"pixel661": {		"0": -1	},	"pixel662": {		"0": -1	},	"pixel663": {		"0": -1	},	"pixel664": {		"0": -1	},	"pixel665": {		"0": -1	},	"pixel666": {		"0": -1	},	"pixel667": {		"0": -1	},	"pixel668": {		"0": -1	},	"pixel669": {		"0": -1	},	"pixel670": {		"0": -1	},	"pixel671": {		"0": -1	},	"pixel672": {		"0": -1	},	"pixel673": {		"0": -1	},	"pixel674": {		"0": -1	},	"pixel675": {		"0": -1	},	"pixel676": {		"0": -1	},	"pixel677": {		"0": -1	},	"pixel678": {		"0": -1	},	"pixel679": {		"0": -1	},	"pixel680": {		"0": -1	},	"pixel681": {		"0": -1	},	"pixel682": {		"0": -1	},	"pixel683": {		"0": -1	},	"pixel684": {		"0": -1	},	"pixel685": {		"0": -1	},	"pixel686": {		"0": -1	},	"pixel687": {		"0": -1	},	"pixel688": {		"0": -1	},	"pixel689": {		"0": -1	},	"pixel690": {		"0": -1	},	"pixel691": {		"0": -1	},	"pixel692": {		"0": -1	},	"pixel693": {		"0": -1	},	"pixel694": {		"0": -1	},	"pixel695": {		"0": -1	},	"pixel696": {		"0": -1	},	"pixel697": {		"0": -1	},	"pixel698": {		"0": -1	},	"pixel699": {		"0": -1	},	"pixel700": {		"0": -1	},	"pixel701": {		"0": -1	},	"pixel702": {		"0": -1	},	"pixel703": {		"0": -1	},	"pixel704": {		"0": -1	},	"pixel705": {		"0": -1	},	"pixel706": {		"0": -1	},	"pixel707": {		"0": -1	},	"pixel708": {		"0": -1	},	"pixel709": {		"0": -1	},	"pixel710": {		"0": -1	},	"pixel711": {		"0": -1	},	"pixel712": {		"0": -1	},	"pixel713": {		"0": -1	},	"pixel714": {		"0": -1	},	"pixel715": {		"0": -1	},	"pixel716": {		"0": -1	},	"pixel717": {		"0": -1	},	"pixel718": {		"0": -1	},	"pixel719": {		"0": -1	},	"pixel720": {		"0": -1	},	"pixel721": {		"0": -1	},	"pixel722": {		"0": -1	},	"pixel723": {		"0": -1	},	"pixel724": {		"0": -1	},	"pixel725": {		"0": -1	},	"pixel726": {		"0": -1	},	"pixel727": {		"0": -1	},	"pixel728": {		"0": -1	},	"pixel729": {		"0": -1	},	"pixel730": {		"0": -1	},	"pixel731": {		"0": -1	},	"pixel732": {		"0": -1	},	"pixel733": {		"0": -1	},	"pixel734": {		"0": -1	},	"pixel735": {		"0": -1	},	"pixel736": {		"0": -1	},	"pixel737": {		"0": -1	},	"pixel738": {		"0": -1	},	"pixel739": {		"0": -1	},	"pixel740": {		"0": -1	},	"pixel741": {		"0": -1	},	"pixel742": {		"0": -1	},	"pixel743": {		"0": -1	},	"pixel744": {		"0": -1	},	"pixel745": {		"0": -1	},	"pixel746": {		"0": -1	},	"pixel747": {		"0": -1	},	"pixel748": {		"0": -1	},	"pixel749": {		"0": -1	},	"pixel750": {		"0": -1	},	"pixel751": {		"0": -1	},	"pixel752": {		"0": -1	},	"pixel753": {		"0": -1	},	"pixel754": {		"0": -1	},	"pixel755": {		"0": -1	},	"pixel756": {		"0": -1	},	"pixel757": {		"0": -1	},	"pixel758": {		"0": -1	},	"pixel759": {		"0": -1	},	"pixel760": {		"0": -1	},	"pixel761": {		"0": -1	},	"pixel762": {		"0": -1	},	"pixel763": {		"0": -1	},	"pixel764": {		"0": -1	},	"pixel765": {		"0": -1	},	"pixel766": {		"0": -1	},	"pixel767": {		"0": -1	},	"pixel768": {		"0": -1	},	"pixel769": {		"0": -1	},	"pixel770": {		"0": -1	},	"pixel771": {		"0": -1	},	"pixel772": {		"0": -1	},	"pixel773": {		"0": -1	},	"pixel774": {		"0": -1	},	"pixel775": {		"0": -1	},	"pixel776": {		"0": -1	},	"pixel777": {		"0": -1	},	"pixel778": {		"0": -1	},	"pixel779": {		"0": -1	},	"pixel780": {		"0": -1	},	"pixel781": {		"0": -1	},	"pixel782": {		"0": -1	},	"pixel783": {		"0": -1	}}
+
+        var data = JSON.stringify(mydata);
+
+
+        for(var i = 0; i < payload.length; i++)
+        {
+          data = data.replace(new RegExp("-1"), payload[i]);
+          //console.log(i);
+        }
+
+        //console.log(data);
+        xhr.send(data);
+        xhr.onload = function()
+        {
+          toastr.success("Record added to training data!");
+          console.log(this.responseText);
+        }
+
+        }
+
+      function reloadPage(){
+        window.location.reload();
+        console.log("Reloading Page.");
+      }
+
+   </script>
+</html>
+

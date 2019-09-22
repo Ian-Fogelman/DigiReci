@@ -1,0 +1,6 @@
+Flask
+requests
+pandas
+sklearn
+sqlalchemy
+numpy
