@@ -1,6 +1,6 @@
 # DigiReci
 
-Inspired by the Kaggle challenge Digit Recognizer, I wanted to develop a front end web application that could be used to help train and analyze a models performance.
+Inspired by the Kaggle challenge <a href="https://www.kaggle.com/c/digit-recognizer"> Digit Recognizer </a>, I wanted to develop a front end web application that could be used to help train and analyze a models performance.
 
 The challenge is given a matrix of 783 pixels, build a machine learning algorithm to identify the digit this is a classification and computer vision fundamentals type of problem.
 
