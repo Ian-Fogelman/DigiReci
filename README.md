@@ -8,4 +8,4 @@ This is the reason I designed Digit Reci, to provide a simple user interface to 
 
 Docker : https://hub.docker.com/r/ianfogelman/digireci
 
-<img src="DigiReciDemo.gif" />
+<img src="DigiReciDemo.gif" style="width:75%"/>
